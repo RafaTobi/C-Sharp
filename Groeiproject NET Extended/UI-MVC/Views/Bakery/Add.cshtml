@@ -1,0 +1,37 @@
+@model Groeiproject.UI.Web.Models.NewBakeryViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        input, button{
+            margin: 5px;
+        }
+        body{
+            text-align: center;
+        }
+        h2 {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h2>Add Bakery</h2>
+<div>
+    <form asp-controller="Bakery" asp-action="Add" method="post">
+        <input asp-for="Name" placeholder="name">
+        <span asp-validation-for="Name" class="text-danger"></span><br/>
+        <input asp-for="Adress" placeholder="adress">
+        <span asp-validation-for="Adress" class="text-danger"></span><br/>
+        <button type="submit">Add Bakery</button>
+        <div asp-validation-summary="All"></div>
+    </form>
+</div>
+</body>
+</html>

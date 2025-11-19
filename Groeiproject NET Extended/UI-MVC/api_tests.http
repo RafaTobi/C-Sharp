@@ -1,0 +1,23 @@
+GET https://localhost:7182/api/breads
+Accept: application/xml
+
+###
+
+GET https://localhost:7182/api/breads/20
+Accept: application/json
+
+###
+
+GET https://localhost:7182/api/Bakeries/1 HTTP/1.1
+User-Agent: MyApp1.0
+Accept: application/json
+Cache-Control: no-cache
+
+###
+
+POST https://localhost:7182/api/Breads
+Content-Type: application/json
+
+{"Id": 16, "name": "brood", "price": 135, "weight": 100, "dateOfProduction":  "2023-12-26"}
+
+###

@@ -1,0 +1,100 @@
+@using Groeiproject.BL.Domain
+@model Baker
+
+@{
+    ViewBag.Title = @Model.Name + " Details";
+    Layout = "_Layout";
+}
+
+<html>
+<head>
+    <style>
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+            }
+    
+            th, td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+    
+            th {
+                background-color: saddlebrown;
+                color: #fff;
+            }
+    
+            tr:hover {
+                background-color: sandybrown;
+            }
+            
+            .strong{
+                font-weight: bold;
+            }
+            
+            #addBakeryBtn:hover{
+                background-color: saddlebrown;
+            }
+            
+            #addBakeryBtn{
+                background-color: sandybrown;
+            }
+        </style>
+</head>
+<h2>Baker Details (ID: <span id="bakerId">@Model.Id</span>)</h2>
+<table>
+    <tr>
+        <td class="strong">Name</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td class="strong">Date Of Birth</td>
+        <td>@Model.DateOfBirth.ToString("d")</td>
+    </tr>
+</table>
+<h2>Bakeries</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Adress</th>
+    </tr>
+    </thead>
+    <tbody id="bakeryTableBody">
+    </tbody>
+</table>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Add Bakery</h2>
+    <form class="mt-3">
+        <div class="mb-3 row">
+            <label for="bakerySelect" class="col-sm-2 form-label">Bakery</label>
+            <div class="col-sm-10">
+                <select id="bakerySelect"></select>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="duration" class="col-sm-2 form-label">Duration of Contract (months)</label>
+            <div class="col-sm-10">
+                <input id="duration" type="number" class="form-control">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="price" class="col-sm-2 form-label">Price</label>
+            <div class="col-sm-10">
+                <input id="price" type="number" class="form-control">
+            </div>
+        </div>
+        <button id="addBakeryBtn" type="button" class="btn btn-primary">Add Bakery to Baker</button>
+    </form>
+}
+
+</html>
+
+@section Scripts
+{
+    <script src="/js/baker/add.js" defer></script>
+}

@@ -1,0 +1,66 @@
+@{
+    ViewBag.Title = "All Bread";
+    Layout = "_Layout";
+}
+<head>
+    <style>    
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+            }
+    
+            th, td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+    
+            th {
+                background-color: saddlebrown;
+                color: #fff;
+            }
+    
+            tr:hover {
+                background-color: sandybrown;
+            }
+            
+            p{
+                text-align: center;
+            }
+            
+            #loadBreads:hover{
+                background-color: saddlebrown;
+            }
+            #loadBreads{
+                background-color: sandybrown;
+            }
+    </style>
+</head>
+<h2>All Bread</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Weight</th>
+    </tr>
+    </thead>
+    <tbody id="breadTableBody">
+
+    </tbody>
+</table>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <button class="btn btn-primary" id="loadBreads">Load Bread</button>
+    </p>
+}
+
+@section Scripts
+{
+    <script src="/js/bread/index.js" defer></script>
+}

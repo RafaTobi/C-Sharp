@@ -1,0 +1,108 @@
+@using Groeiproject.BL.Domain
+@model Bakery
+
+@{
+    ViewBag.Title = @Model.Name + " Details";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        table {
+                        width: 80%;
+                        margin: 20px auto;
+                        border-collapse: collapse;
+                    }
+            
+                    th, td {
+                        padding: 12px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
+            
+                    th {
+                        background-color: saddlebrown;
+                        color: #fff;
+                    }
+            
+                    tr:hover {
+                        background-color: sandybrown;
+                    }
+    </style>
+</head>
+<body>
+<div>
+    <h2>Bakery Details (Id: <span id="bakeryIdSpan">@Model.Id</span>)</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Adres</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Model.Name</td>
+            <td>
+                @if (User.IsInRole("Admin") || User.Identity.Name == Model.Maintainer.UserName)
+                {
+                    <input type="text" id="updatedAddress" value="@Model.Adres"/>
+                }
+                else
+                {
+                    @Model.Adres
+                }
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    @if(User.IsInRole("Admin") || User.Identity.Name == Model.Maintainer.UserName)
+    {
+        <button type="button" id="updateButton">Update</button>
+
+    }
+    @if (Model.Maintainer != null)
+    {
+        <p>Maintained by @Model.Maintainer.UserName</p>
+    }
+    else
+    {
+        <p>Maintainer unknown</p>
+    }
+    <h2>Bakers</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Contract active until</th>
+            <th>Contract Price</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Contract contract in Model.Contracts)
+        {
+            <tr>
+                <td>@contract.Baker.Name</td>
+                <td>@contract.Baker.DateOfBirth.ToString("d")</td>
+                <td>@contract.EndDate.ToString("d")</td>
+                <td>€@contract.Price</td>
+                <td>
+                    <a asp-controller="Baker" asp-action="BakerDetails" asp-route-id="@contract.Baker.Id">Details</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+@section Scripts
+{
+    <script src="/js/bakery/updateAddress.js" defer></script>
+}
